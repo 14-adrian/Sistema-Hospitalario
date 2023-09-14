@@ -1,11 +1,11 @@
 import mysql.connector
 
 def myDB():
-    conect = mysql.connector.connect(
+    connect = mysql.connector.connect(
             host='localhost',
             user="root",
             password="",
             database="storage_db"
     )
-    return conect
+    return connect
 
