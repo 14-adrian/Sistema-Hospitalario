@@ -1,0 +1,28 @@
+
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" id="content">
+
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+    
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+
+        <div class="topbar-divider d-none d-sm-block"></div>
+        <!-- Nav Item - User Information -->
+
+        <span id="user_logged_id"></span>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                eel.get_user_online()
+            })
+            eel.expose(get_user)
+            function get_user(user){
+                $('#user_logged_id').text('USUARIO: '+ user)
+            }
+        </script>
+
+    </ul>
+
+</nav>

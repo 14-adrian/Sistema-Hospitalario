@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="/eel.js"></script>
-     
+    <script type="text/javascript" src="../js/node_modules/jquery/dist/jquery.js"></script>
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
      
     <link rel="stylesheet" href="../css/sb-admin-2.min.css">
     <link rel="icon" href="../img/pasword.png">
-    <title>Python Admin</title>
 </head>
 <body>
+    
   {% block content %}
+    
   {% endblock %}
  
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../js/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
  
     <!-- Core plugin JavaScript-->
@@ -31,11 +32,35 @@
     <!-- Page level custom scripts -->
     <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>    
+   
     <script>
         function link(target) {
             window.location.href=target;
         }
+        $('#user_logged_id').text('User logged: ')
+        
     </script>
+
+    <script type="text/javascript">
+        // USER LOGIN
+        
+        async function btnlog(){ 
+			//var username = $('#get_user_login').val();
+			//alert(username);
+            eel.btn_login($('#get_user_login').val(), $('#get_user_password').val())
+        };
+
+        eel.expose(login_return)
+        function login_return(status){ //alert(status);
+           if (status == "success"){
+               location.href = "index.html";
+            }
+            if (status == "failed"){ 
+                $('#login_txt').text("Incorrect User or Password")
+            }
+        }
+    </script>
+
     
 </body>
 </html>

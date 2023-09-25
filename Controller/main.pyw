@@ -3,14 +3,15 @@ import eel
 import pyautogui
 from Models.login import login_user, login_session
  
-actual_user = ''
+actual_user = 'empty'
 
 eel.init('Views')
  
 @eel.expose
 def btn_login(user_name, password):
-    msg = login_user(user_name, password)
+    global actual_user
     actual_user = user_name
+    msg = login_user(user_name, password)
     eel.login_return(str(msg))
  
 @eel.expose
