@@ -8,11 +8,9 @@ def login_user(user_name, password):
     
     try:
         mydb = myDB()
-        #connect = sqlite3.connect("views/database/storage.db")
-        #cursor = connect.cursor()
         cursor = mydb.cursor()
         cursor.execute(
-            "SELECT Password FROM users WHERE User=%s",(user_name,))
+            "SELECT Contraseña FROM usuarios WHERE Usuario=%s",(user_name,))
         get_password = cursor.fetchone()
         if password == get_password[0]:
             msg = "success"

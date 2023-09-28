@@ -5,7 +5,7 @@ def myDB():
             host='localhost',
             user="root",
             password="",
-            database="storage_db"
+            database="hospital_db"
     )
     return connect
 

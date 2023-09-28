@@ -1,7 +1,8 @@
 from __future__ import print_function
 import eel
 import pyautogui
-from Models.login import login_user, login_session
+from Models.login import login_user
+from Models.medico import *
  
 actual_user = 'empty'
 
@@ -17,16 +18,23 @@ def btn_login(user_name, password):
 @eel.expose
 def get_user_online():
     get_user = actual_user
-    print(get_user)
     eel.get_user(str(get_user))
 
 @eel.expose
 def new_window(target: str):
     eel.show(f"html/{target}")
 
+#------------CRUD MEDICOS--------------------
+
+@eel.expose
+def get_registers():
+    select_reg = showallmedicos()
+    eel.action_out(select_reg)
+
      
 eel.start(
-    'templates/login.html',
+    'templates/index.html',
     size=pyautogui.size(),
     jinja_templates='templates'
 )
+
