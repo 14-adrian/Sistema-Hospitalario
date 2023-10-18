@@ -27,11 +27,35 @@ def new_window(target: str):
 #------------CRUD MEDICOS--------------------
 
 @eel.expose
-def get_registers():
+def fetch_medicos():
     select_reg = showallmedicos()
     eel.action_out(select_reg)
 
+@eel.expose 
+def save_medico(id, esp, nombre, telefono, correo, fechaN, sexo):
+    print(id, esp, nombre, telefono, correo, fechaN, sexo)
+    msg = saveMedico(int(id), esp, nombre, telefono, correo, str(fechaN), sexo)
+    print(msg)
+    eel.save_return(str(msg))
+
+@eel.expose
+def get_medico(id):
+    select_medico = showSelectedMedico(id)
+    print(select_medico)
+    eel.action_edit_m(select_medico)
      
+@eel.expose 
+def update_medico(id, esp, nombre, telefono, correo, fechaN, sexo):
+    msg = updateMedico(id, esp, nombre, telefono, correo, fechaN, sexo)
+    eel.update_return(str(msg))    
+     
+@eel.expose
+def get_delete_medico(id):
+    select_del_medico = deleteMedico(id)
+    eel.delete_return(select_del_medico)
+
+#------------CRUD PACIENTES--------------------
+
 eel.start(
     'templates/index.html',
     size=pyautogui.size(),

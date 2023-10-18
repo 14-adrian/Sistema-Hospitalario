@@ -129,3 +129,53 @@ width:560px;height:450px;background:#fff;border-radius:10px;overflow:hidden;disp
     font-family: 'Source Sans Pro', sans-serif;
     padding: 6px 18px;
 }
+
+
+.modalContainer {
+    display: none;
+    position: absolute;
+    z-index:auto;
+    left: 240px;
+    top: 40px;
+    width: 70%;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+.modal-content {
+    background-color: #fefefe;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 100%;
+}
+ 
+#close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+.form-detail .input-text {
+    margin-bottom: 27px;
+}
+
+label.error {
+    color: crimson;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+.modalDelete {
+    display: none;
+    position: absolute;
+    z-index:auto;
+    left:40%;
+    top: 10rem;
+    width: 30%;
+    height: 2rem;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+

@@ -1,82 +1,119 @@
 
-<div class="container">
-    <p style="text-align:center;"><h2>Medicos</h2></p>
-    <p style="text-align:right;"><button type="button" class="btn-secondary">Agregar Medico</button></p>
-    <div class="table-responsive">
-        <table id="medicdatatable" class="table table-bordered" width="100%" cellspacing="0">
-            <tr>
-                <th>ID Medico</th>
-                <th>Especialidad</th>
-                <th>Nombre</th>
-                <th>Telefono</th>
-                <th>Correo</th>
-                <th>Fecha Nacimiento</th>
-                <th>Sexo</th>
-                <th>Accion</th>
-            </tr>
-        </table> 
+<div class="container-fluid">
+    <p class="h3 mb-2 text-gray-800"><h2>Medicos</h2></p>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Registro Medicos</h6>
+            <p style="text-align:right;"><button type="button" class="btn-success" id="btn_addnew">Agregar Medico</button></p>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="medicoTable" class="table table-bordered" width="100%" cellspacing="0">
+                    <tr>
+                        <th>ID Medico</th>
+                        <th>Especialidad</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th>Fecha Nacimiento</th>
+                        <th>Sexo</th>
+                        <th>Accion</th>
+                    </tr>
+                </table> 
+                
+                   
+            </div>
+        </div>
     </div>
     
+    
 </div>
-<script type="text/javascript">
-    $(document).ready(function(){
-        eel.get_registers()
-        eel.get_user_online()
-    })
-
-            
-    eel.expose(action_out)
-    function action_out(registers){ 
-        //alert("Show Table");
-        registers.forEach(showdata)
-    }
-            
-    function showdata(item, index){
-        var get_table = document.getElementById("medicdatatable");
-        var tr = document.createElement("tr");
-        var td = document.createElement("td");
-        var td2 = document.createElement("td");
-        var td3 = document.createElement("td");
-        var td4 = document.createElement("td");
-        var td5 = document.createElement("td");
-        var td6 = document.createElement("td");
-        var td7 = document.createElement("td");
-        var td8 = document.createElement("td");
-    
-        td.innerText = item[0]
-        td2.innerText = item[1]
-        td3.innerText = item[2]
-        td4.innerText = item[3]
-        td5.innerText = item[4]
-        td6.innerText = item[5]
-        td7.innerText = item[6]
-                    
-        td8.innerHTML = '<button type="button" class="btn" onclick="buttonedit()">Edit</button> | <button type="button" class="btndelete" onclick="buttondelete()">Delete</button>'
-        //td5.className = "acoes"
-        //td5.setAttribute("onclick","actions(this, 'documents');")
-                    
-        get_table.appendChild(tr)
-        tr.appendChild(td)
-        tr.appendChild(td2)
-        tr.appendChild(td3)
-        tr.appendChild(td4)
-        tr.appendChild(td5)
-        tr.appendChild(td6)
-        tr.appendChild(td7)
-        tr.appendChild(td8)
-    }
-    function buttonedit()
-    {
-        alert("Edit Records")
-    }   
-    function buttondelete()
-    {
-        if(confirm("Are you sure you want to delete this?")) {
-            alert("Successfully Deleted");
-        }else{
-            return false;
-        }
-    }
-     
-</script>
-    
+<div class="modalContainer" id="Addnewmodal">
+    <div class="modal-content">
+      <span id="close" class="close">×</span>
+      <p style="text-align:center;"><h2>Agregar Nuevo Medico</h2></p>
+      <form class="form-detail" action="#" method="post" id="myform">
+          <div class="form-group">
+              <label>ID:</label> 
+              <input type="number" name="txtID" id="txtID" class="form-control" maxlength="4" required placeholder="0000">
+          </div>
+          <div class="form-group">
+              <label>Especialidad:</label>
+              <input type="text" name="txtEsp" id="txtEsp" class="form-control" required>
+          </div>
+          <div class="form-group">
+              <label>Nombre:</label>
+              <input type="text" name="txtNombre" id="txtNombre" class="form-control" required>
+          </div>
+          <div class="form-group">
+              <label>Telefono:</label>
+              <input type="text" name="txtTel" id="txtTel" class="form-control" required placeholder="0000-0000">
+          </div>
+          <div class="form-group">
+              <label>Correo:</label>
+              <input type="text" name="txtCorreo" id="txtCorreo" class="form-control" required placeholder="mail@mail.com">
+          </div>
+          <div class="form-group">
+              <label>Fecha Nacimiento:</label>
+              <input type="text" name="txtFNac" id="txtFNac" class="form-control" required placeholder="dd/MM/aaaa">
+          </div>
+          <div class="form-group">
+              <label>Sexo:</label>
+              <input type="text" name="txtSexo" id="txtSexo" class="form-control" required placeholder="M o F">
+          </div>
+          <div class="form-group form-row-last">
+              <input type="submit" name="register" class="btn btn-success" value="Agregar Medico" onclick="agregar_medico();">
+          </div>
+          <div class="box"><label class="label_input" id="return_register" style="width: 90%;color:green;font-weight:bold;"></label></div>
+      </form>
+    </div>
+</div>
+<div class="modalContainer" id="Editmodal">
+    <div class="modal-content">
+      <span id="close" class="closeEdit">×</span>
+      <p style="text-align:center;"><h2>Editar Medico</h2></p>
+      <form class="form-detail" action="#" method="post" id="myformEditMed"><input type="hidden" name="med_id" id="m_id" >
+          <div class="form-group">
+              <label>Especialidad:</label>
+              <input type="text" name="edit_Mesp" id="edit_Mesp" class="form-control" required>
+          </div>
+          <div class="form-group">
+              <label>Nombre:</label>
+              <input type="text" name="edit_Mnombre" id="edit_Mnombre" class="form-control" required>
+          </div>
+          <div class="form-group">
+              <label>Telefono:</label>
+              <input type="text" name="edit_MTel" id="edit_MTel" class="form-control" required >
+          </div>
+          <div class="form-group">
+              <label>Correo:</label>
+              <input type="text" name="edit_Mcorreo" id="edit_Mcorreo" class="form-control" required >
+          </div>
+          <div class="form-group">
+              <label>Fecha Nacimiento:</label>
+              <input type="text" name="edit_Mfnac" id="edit_Mfnac" class="form-control" required >
+          </div>
+          <div class="form-group">
+              <label>Sexo:</label>
+              <input type="text" name="edit_Msexo" id="edit_Msexo" class="form-control" required >
+          </div>
+          <div class="form-group form-row-last">
+              <input type="submit" name="register" class="btn btn-success" value="Actualizar" onclick="actualizar_medico();">
+          </div>
+          <div class="box"><label class="label_input" id="return_update" style="width: 90%;color:green;font-weight:bold;"></label></div>
+      </form>
+    </div>
+</div>
+<div class="modalDelete" id="Delete_modal_medico">
+    <div class="modal-content">
+      <span id="close" class="closedelete">×</span>
+      <p style="text-align:center;"><h2>Borrar Medico</h2></p>
+      <p style="text-align:center;"><h3>Estas seguro de eliminar el medico?</h3></p>
+      <div class="form-detail">
+      <input type="hidden" name="idvalue" id="idvalue"> 
+      <input type="submit" name="btndelete" class="btn-danger" value="Eliminar" onclick="btn_submitdelete($('#idvalue').val());">
+      <div class="box"><label class="label_input" id="return_delete" style="width: 90%;color:green;font-weight:bold;"></label></div>
+      </div>
+    </div>
+  </div>
+<script type="text/javascript" src="../js/medicos.js"></script>    
