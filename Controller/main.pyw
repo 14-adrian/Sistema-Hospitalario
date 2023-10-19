@@ -3,6 +3,7 @@ import eel
 import pyautogui
 from Models.login import login_user
 from Models.medico import *
+from Models.paciente import *
  
 actual_user = 'empty'
 
@@ -55,6 +56,33 @@ def get_delete_medico(id):
     eel.delete_return(select_del_medico)
 
 #------------CRUD PACIENTES--------------------
+@eel.expose
+def fetch_pacientes():
+    select_reg = showallpacientes()
+    eel.action_out(select_reg)
+
+@eel.expose 
+def save_paciente(id, nombre, telefono, correo, fechaN, sexo, altura, peso):
+    print(id, nombre, telefono, correo, fechaN, sexo, altura, peso)
+    msg = savePaciente(int(id), nombre, telefono, correo, fechaN, sexo, altura, peso)
+    print(msg)
+    eel.save_return(str(msg))
+
+@eel.expose
+def get_paciente(id):
+    select_pac = showSelectedPaciente(id)
+    print(select_pac)
+    eel.action_edit_m(select_pac)
+     
+@eel.expose 
+def update_paciente(id, nombre, telefono, correo, fechaN, sexo, altura, peso):
+    msg = updatePaciente(id, nombre, telefono, correo, fechaN, sexo, altura, peso)
+    eel.update_return(str(msg))    
+     
+@eel.expose
+def get_delete_paciente(id):
+    select_del_pac = deletePaciente(id)
+    eel.delete_return(select_del_pac)
 
 eel.start(
     'templates/index.html',

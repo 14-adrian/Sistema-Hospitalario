@@ -134,7 +134,7 @@ async function agregar_medico(){
 eel.expose(save_return); 
 function save_return(status){
     if (status == "success"){
-        $('#return_register').text('New Employee completed successfully!');
+        $('#return_register').text('Nuevo Medico Agregado!');
         $('#txtID').val('');
         $('#txtEsp').val('');
         $('#txtNombre').val('');
@@ -200,7 +200,7 @@ async function btn_submitdelete(id){
 }
 
 eel.expose(delete_return)
-function delete_return(delMedic){ 
+function delete_return(status){ 
     if (status == "success"){
         location.href = "crudMedicos.html";
     }
