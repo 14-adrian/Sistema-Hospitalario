@@ -5,6 +5,7 @@ from Models.login import login_user
 from Models.medico import *
 from Models.paciente import *
 from Models.medicina import *
+from Models.cita import *
  
 actual_user = 'empty'
 
@@ -113,6 +114,45 @@ def update_medicina(id, desc):
 def get_delete_medicina(id):
     select_del_medici = deleteMedicina(id)
     eel.delete_return(select_del_medici)
+
+#-------------CRUD CITAS-----------------------
+@eel.expose
+def fetch_citas():
+    select_reg = showallcitas()
+    eel.action_out(select_reg)
+
+@eel.expose
+def get_NMedico():
+    select_reg = showNombreM()
+    eel.action_NM(select_reg)
+
+@eel.expose
+def get_NPaciente():
+    select_reg = showNombreP()
+    eel.action_NP(select_reg)
+
+@eel.expose 
+def save_cita(id, nombreM, nombreP, tipo, fecha, estado):
+    print(id, nombreM, nombreP, tipo, fecha, estado)
+    msg = saveCita(int(id), nombreM, nombreP, tipo, fecha, estado)
+    print(msg)
+    eel.save_return(str(msg))
+
+@eel.expose
+def get_cita(id):
+    select_cita = showSelectedCita(id)
+    print(select_cita)
+    eel.action_edit_m(select_cita)
+     
+@eel.expose 
+def update_cita(id, nombreM, nombreP, tipo, fecha, estado):
+    msg = updateCita(id, nombreM, nombreP, tipo, fecha, estado)
+    eel.update_return(str(msg))    
+     
+@eel.expose
+def get_delete_cita(id):
+    select_del_cita = deleteCita(id)
+    eel.delete_return(select_del_cita)
 
 eel.start(
     'templates/index.html',
