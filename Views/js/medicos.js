@@ -24,14 +24,12 @@ function link(target) {
 
 eel.expose(action_out)
 function action_out(registers){ 
-    //alert("Show Table");
     registers.forEach(showdata)
 }
 
 //-------------EDITAR----------------
 eel.expose(action_edit_m)
 function action_edit_m(editMedicos){ 
-   //alert(editemployees);
    editMedicos.forEach(get_medico_values)
 }
 
@@ -41,8 +39,6 @@ async function btn_edit(id){
 }
 
 function get_medico_values(item, index){
-    //alert(item);
-    //alert(index);
     if (index == 0) {
         document.getElementById("m_id").value = item;
     } else if (index == 1) {
@@ -84,8 +80,6 @@ function showdata(item, index){
     td7.innerText = item[6]
                 
     td8.innerHTML = '<button type="button" class="btn-warning" onclick="btn_edit('+id+')">Editar</button> <button type="button" class="btn-danger" onclick="buttondelete('+id+')">Eliminar</button>'
-    //td5.className = "acoes"
-    //td5.setAttribute("onclick","actions(this, 'documents');")
                 
     get_table.appendChild(tr)
     tr.appendChild(td)

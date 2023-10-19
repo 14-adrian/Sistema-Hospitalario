@@ -1,0 +1,74 @@
+
+<div class="container-fluid">
+    <p class="h3 mb-2 text-gray-800"><h2>Medicina</h2></p>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Registro Medicinas</h6>
+            <p style="text-align:right;"><button type="button" class="btn-success" id="btn_addnew">Agregar Medicina</button></p>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="medicoTable" class="table table-bordered" width="100%" cellspacing="0">
+                    <tr>
+                        <th>ID Medicina</th>
+                        <th>Descripcion</th>
+                        <th>Accion</th>
+                    </tr>
+                </table> 
+                
+                   
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+<div class="modalContainer" id="Addnewmodal">
+    <div class="modal-content">
+      <span id="close" class="close">×</span>
+      <p style="text-align:center;"><h2>Agregar Nueva Medicina</h2></p>
+      <form class="form-detail" action="#" method="post" id="myform">
+          <div class="form-group">
+              <label>ID:</label> 
+              <input type="number" name="txtID" id="txtID" class="form-control" maxlength="6" required placeholder="0000">
+          </div>
+          <div class="form-group">
+              <label>Descripcion:</label>
+              <input type="text" name="txtDesc" id="txtDesc" class="form-control" required>
+          </div>
+          <div class="form-group form-row-last">
+              <input type="submit" name="register" class="btn btn-success" value="Agregar Medico" onclick="agregar_medico();">
+          </div>
+          <div class="box"><label class="label_input" id="return_register" style="width: 90%;color:green;font-weight:bold;"></label></div>
+      </form>
+    </div>
+</div>
+<div class="modalContainer" id="Editmodal">
+    <div class="modal-content">
+      <span id="close" class="closeEdit">×</span>
+      <p style="text-align:center;"><h2>Editar Medicina</h2></p>
+      <form class="form-detail" action="#" method="post" id="myformEditMed"><input type="hidden" name="med_id" id="m_id" >
+          <div class="form-group">
+              <label>Descripcion:</label>
+              <input type="text" name="edit_Desc" id="edit_Desc" class="form-control" required>
+          </div>
+          <div class="form-group form-row-last">
+              <input type="submit" name="register" class="btn btn-success" value="Actualizar" onclick="actualizar_medico();">
+          </div>
+          <div class="box"><label class="label_input" id="return_update" style="width: 90%;color:green;font-weight:bold;"></label></div>
+      </form>
+    </div>
+</div>
+<div class="modalDelete" id="Delete_modal_medico">
+    <div class="modal-content">
+      <span id="close" class="closedelete">×</span>
+      <p style="text-align:center;"><h2>Borrar Medicina</h2></p>
+      <p style="text-align:center;"><h3>Estas seguro de eliminar el medicamento?</h3></p>
+      <div class="form-detail">
+      <input type="hidden" name="idvalue" id="idvalue"> 
+      <input type="submit" name="btndelete" class="btn-danger" value="Eliminar" onclick="btn_submitdelete($('#idvalue').val());">
+      <div class="box"><label class="label_input" id="return_delete" style="width: 90%;color:green;font-weight:bold;"></label></div>
+      </div>
+    </div>
+  </div>
+<script type="text/javascript" src="../js/medicina.js"></script>    
