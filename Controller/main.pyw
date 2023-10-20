@@ -6,6 +6,7 @@ from Models.medico import *
 from Models.paciente import *
 from Models.medicina import *
 from Models.cita import *
+from Models.diagnostico import *
  
 actual_user = 'empty'
 
@@ -153,6 +154,52 @@ def update_cita(id, nombreM, nombreP, tipo, fecha, estado):
 def get_delete_cita(id):
     select_del_cita = deleteCita(id)
     eel.delete_return(select_del_cita)
+
+#-------------CRUD DIAGNOSTICOS------------------
+@eel.expose
+def fetch_diag():
+    select_reg = showalldiag()
+    eel.action_out(select_reg)
+
+@eel.expose
+def get_DMedico():
+    select_reg = showNombreMD()
+    eel.action_NM(select_reg)
+
+@eel.expose
+def get_DPaciente():
+    select_reg = showNombrePD()
+    eel.action_NP(select_reg)
+
+@eel.expose
+def get_DMedicina():
+    select_reg = showLstMed()
+    eel.action_MD(select_reg)
+
+@eel.expose 
+def save_diag(id, paciente, medico, idc, desc, medicina):
+    print(id, paciente, medico, idc, desc, medicina)
+    msg = saveDiag(int(id), paciente, medico, idc, desc, medicina)
+    print(msg)
+    eel.save_return(str(msg))
+
+@eel.expose
+def get_diag(id):
+    select_diag = showSelectedDiag(id)
+    print(select_diag)
+    eel.action_edit_m(select_diag)
+     
+@eel.expose 
+def update_diag(id, paciente, medico, idc, desc, medicina):
+    msg = updateDiag(id, paciente, medico, idc, desc, medicina)
+    eel.update_return(str(msg))    
+     
+@eel.expose
+def get_delete_diag(id):
+    select_del_diag = deleteDiag(id)
+    eel.delete_return(select_del_diag)
+
+
 
 eel.start(
     'templates/index.html',

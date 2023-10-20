@@ -18,18 +18,70 @@ def showalldiag():
         msg = "Error"
         return msg
     
-    
-def saveDiag(id, nombreM, nombreP, tipo, fecha, estado):
+def showNombreMD():
     try:
         mydb = myDB()
         cursor = mydb.cursor()
-        print(nombreM)
+        cursor.execute("SELECT `Nombre Medico` FROM cita")
+        registers = []
+        for item in cursor.fetchall():
+            #test = item[1]
+            #print(test)
+            registers.append(item)
+        
+        return registers
+    except Exception as error:
+        print(error)
+        msg = "Error"
+        return msg
+    
+def showNombrePD():
+    try:
+        mydb = myDB()
+        cursor = mydb.cursor()
+        cursor.execute("SELECT `Nombre Paciente` FROM cita")
+        registers = []
+        for item in cursor.fetchall():
+            #test = item[1]
+            #print(test)
+            registers.append(item)
+        
+        return registers
+    except Exception as error:
+        print(error)
+        msg = "Error"
+        return msg
+    
+def showLstMed():
+    try:
+        mydb = myDB()
+        cursor = mydb.cursor()
+        cursor.execute("SELECT Descripcion FROM medicina")
+        registers = []
+        for item in cursor.fetchall():
+            #test = item[1]
+            #print(test)
+            registers.append(item)
+        
+        return registers
+    except Exception as error:
+        print(error)
+        msg = "Error"
+        return msg
+    
+    
+def saveDiag(id, paciente, medico, idc, desc, medicina):
+    try:
+        mydb = myDB()
+        cursor = mydb.cursor()
+        print(paciente)
  
-        if id != "" and nombreM != "" and nombreP != "" and tipo != ""and fecha != "" and estado != "":
-            add_cita = """INSERT INTO `cita` (`idCita`, `Nombre Medico`, `Nombre Paciente`, `tipoConsulta`, `fechaSolicitud`, `estado`) 
+        if id != "" and paciente != "" and medico != "" and idc != ""and desc != "" and medicina != "":
+            add_diag = """INSERT INTO `diagnostico` 
+            (`idDiagnostico`, `Paciente`, `Medico`, `id_Cita`, `descripcion`, `medicina`) 
             VALUES (%s, %s, %s, %s, %s, %s);"""
-            data_cita = (id, nombreM, nombreP, tipo, fecha, estado)
-            cursor.execute(add_cita, data_cita)
+            data_diag = (id, paciente, medico, idc, desc, medicina)
+            cursor.execute(add_diag, data_diag)
             mydb.commit()
             mydb.close()
             msg = "success"
@@ -47,10 +99,10 @@ def showSelectedDiag(id):
         mydb = myDB()
         cursor = mydb.cursor()
         print(id)
-        sel_cita = """ SELECT * FROM cita
-                            WHERE `idCita` = %s;"""
-        data_cita = (id,)
-        cursor.execute(sel_cita, data_cita)
+        sel_diag = """ SELECT * FROM `diagnostico`
+                            WHERE `idDiagnostico` = %s;"""
+        data_diag = (id,)
+        cursor.execute(sel_diag, data_diag)
         editarcita = []
         for item in cursor.fetchone():
             editarcita.append(item)
@@ -60,21 +112,21 @@ def showSelectedDiag(id):
         msg = "failure"
         return msg
 
-def updateCita(id, nombreM, nombreP, tipo, fecha, estado):
+def updateDiag(id, paciente, medico, idc, desc, medicina):
     try:
         mydb = myDB()
         cursor = mydb.cursor()
-        print(nombreM)
+        print(paciente)
  
-        if id != "" and nombreM != "" and nombreP != "" and tipo != ""and fecha != "" and estado != "":
-            upd_cita = """UPDATE `cita` SET
-              `Nombre Medico` = %s , `Nombre Paciente` = %s,
-                `tipoConsulta` = %s, `fechaSolicitud` = %s,
-                  `estado` = %s
-            WHERE `cita`.`idCita` = %s;
+        if id != "" and paciente != "" and medico != "" and idc != ""and desc != "" and medicina != "":
+            upd_diag = """UPDATE `diagnostico` 
+            SET `Paciente` = %s,
+              `Medico` = %s, `id_Cita` = %s,
+                `descripcion` = %s, `medicina` = %s
+            WHERE `diagnostico`.`idDiagnostico` = %s;
             """
-            data_cita = (nombreM, nombreP, tipo, fecha, estado, id)
-            cursor.execute(upd_cita, data_cita)
+            data_diag = (paciente, medico, idc, desc, medicina, id)
+            cursor.execute(upd_diag, data_diag)
             mydb.commit()
             mydb.close()
             msg = "success"
@@ -87,15 +139,15 @@ def updateCita(id, nombreM, nombreP, tipo, fecha, estado):
         msg = "failure"
         return msg 
     
-def deleteCita(id):
+def deleteDiag(id):
     try:
         mydb = myDB()
         cursor = mydb.cursor()
-        del_cita = """DELETE FROM cita
-        WHERE `cita`.`idCita` = %s
+        del_diag = """DELETE FROM diagnostico 
+        WHERE `diagnostico`.`idDiagnostico` = %s
             """
-        data_cita = (id,)
-        cursor.execute(del_cita, data_cita)
+        data_diag = (id,)
+        cursor.execute(del_diag, data_diag)
         mydb.commit()
         mydb.close()
         msg = "success"
