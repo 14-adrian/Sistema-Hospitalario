@@ -98,7 +98,6 @@ def showSelectedDiag(id):
     try:
         mydb = myDB()
         cursor = mydb.cursor()
-        print(id)
         sel_diag = """ SELECT * FROM `diagnostico`
                             WHERE `idDiagnostico` = %s;"""
         data_diag = (id,)
@@ -118,7 +117,7 @@ def updateDiag(id, paciente, medico, idc, desc, medicina):
         cursor = mydb.cursor()
         print(paciente)
  
-        if id != "" and paciente != "" and medico != "" and idc != ""and desc != "" and medicina != "":
+        if paciente != "" and medico != "" and idc != "" and desc != "" and medicina != "":
             upd_diag = """UPDATE `diagnostico` 
             SET `Paciente` = %s,
               `Medico` = %s, `id_Cita` = %s,

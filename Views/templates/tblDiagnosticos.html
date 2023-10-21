@@ -1,21 +1,21 @@
 
 <div class="container-fluid">
-    <p class="h3 mb-2 text-gray-800"><h2>Citas</h2></p>
+    <p class="h3 mb-2 text-gray-800"><h2>Diagnostico</h2></p>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Registro Citas</h6>
-            <p style="text-align:right;"><button type="button" class="btn-success" id="btn_addnew">Agregar Cita</button></p>
+            <h6 class="m-0 font-weight-bold text-primary">Registro Diagnostico</h6>
+            <p style="text-align:right;"><button type="button" class="btn-success" id="btn_addnew">Agregar Diagnostico</button></p>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table id="medicoTable" class="table table-bordered" width="100%" cellspacing="0">
                     <tr>
-                        <th>ID Cita</th>
-                        <th>Nombre Medico</th>
+                        <th>ID Diagnostico</th>
                         <th>Nombre Paciente</th>
-                        <th>Tipo</th>
-                        <th>Fecha</th>
-                        <th>Estado</th>
+                        <th>Nombre Medico</th>
+                        <th>ID Cita</th>
+                        <th>Descripcion</th>
+                        <th>Medicina</th>
                         <th>Accion</th>
                     </tr>
                 </table> 
@@ -30,7 +30,7 @@
 <div class="modalContainer" id="Addnewmodal">
     <div class="modal-content">
       <span id="close" class="close">×</span>
-      <p style="text-align:center;"><h2>Agregar Nueva Cita</h2></p>
+      <p style="text-align:center;"><h2>Agregar Nuevo Diagnostico</h2></p>
       <form class="form-detail" action="#" method="post" id="myform">
           <div class="form-group">
               <label>ID:</label> 
@@ -47,22 +47,20 @@
             </select>
           </div>
           <div class="form-group">
-              <label>Tipo Cita:</label>
-              <input type="text" name="txtTipo" id="txtTipo" class="form-control" required >
+              <label>ID Cita:</label>
+              <input type="text" name="txtIDC" id="txtIDC" class="form-control" required >
           </div>
           <div class="form-group">
-              <label>Fecha Cita:</label>
-              <input type="date" name="txtFecha" id="txtFecha" class="form-control" required placeholder="dd/MM/aaaa">
+              <label>Descripcion:</label>
+              <input type="text" name="txtDESC" id="txtDESC" class="form-control" required >
           </div>
           <div class="form-group">
-              <label>Estado:</label>
-              <select class="form-control form-control-sm" name="txtEstado" id="txtEstado">
-                <option>Activo</option>
-                <option>Inactivo</option>
+              <label>Medicina:</label>
+              <select class="form-control form-control-sm" name="txtMedicina" id="txtMedicina">
               </select>
           </div>
           <div class="form-group form-row-last">
-              <input type="submit" name="register" class="btn btn-success" value="Agregar Cita" onclick="agregar_medico();">
+              <input type="submit" name="register" class="btn btn-success" value="Agregar Diagnostico" onclick="agregar_medico();">
           </div>
           <div class="box"><label class="label_input" id="return_register" style="width: 90%;color:green;font-weight:bold;"></label></div>
       </form>
@@ -71,7 +69,7 @@
 <div class="modalContainer" id="Editmodal">
     <div class="modal-content">
       <span id="close" class="closeEdit">×</span>
-      <p style="text-align:center;"><h2>Editar Cita</h2></p>
+      <p style="text-align:center;"><h2>Editar Diagnostico</h2></p>
       <form class="form-detail" action="#" method="post" id="myformEditMed"><input type="hidden" name="med_id" id="m_id" >
             <div class="form-group">
                 <label>Medico:</label>
@@ -84,18 +82,16 @@
                 </select>
             </div>
           <div class="form-group">
-              <label>Tipo:</label>
-              <input type="text" name="edit_Tipo" id="edit_Tipo" class="form-control" required >
+              <label>ID Cita:</label>
+              <input type="text" name="edit_IDC" id="edit_IDC" class="form-control" required >
           </div>
           <div class="form-group">
-              <label>Fecha:</label>
-              <input type="text" name="edit_Fecha" id="edit_Fecha" class="form-control" required >
+              <label>Descripcion:</label>
+              <input type="text" name="edit_DESC" id="edit_DESC" class="form-control" required >
           </div>
           <div class="form-group">
-            <label>Estado:</label>
-            <select class="form-control form-control-sm" name="edit_Estado" id="edit_Estado">
-              <option>Activo</option>
-              <option>Inactivo</option>
+            <label>Medicina:</label>
+            <select class="form-control form-control-sm" name="edit_Medicina" id="edit_Medicina">
             </select>
         </div>
           <div class="form-group form-row-last">
@@ -108,8 +104,8 @@
 <div class="modalDelete" id="Delete_modal_medico">
     <div class="modal-content">
       <span id="close" class="closedelete">×</span>
-      <p style="text-align:center;"><h2>Borrar Cita</h2></p>
-      <p style="text-align:center;"><h3>Estas seguro de eliminar la Cita?</h3></p>
+      <p style="text-align:center;"><h2>Borrar Diagnostico</h2></p>
+      <p style="text-align:center;"><h3>Estas seguro de eliminar el Diagnostico?</h3></p>
       <div class="form-detail">
       <input type="hidden" name="idvalue" id="idvalue"> 
       <input type="submit" name="btndelete" class="btn-danger" value="Eliminar" onclick="btn_submitdelete($('#idvalue').val());">
@@ -117,4 +113,4 @@
       </div>
     </div>
   </div>
-<script type="text/javascript" src="../js/citas.js"></script>    
+<script type="text/javascript" src="../js/diagnosticos.js"></script>    

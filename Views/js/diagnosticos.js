@@ -55,7 +55,7 @@ function action_edit_m(editMedicos){
 }
 
 async function btn_edit(id){ 
-    eel.get_cita(id)
+    eel.get_diag(id)
     $("#Editmodal").show();
 }
 
@@ -69,7 +69,7 @@ function get_diag_values(item, index){
     } else if (index == 3) {
         document.getElementById("edit_IDC").value = item;
     }else if (index == 4) {
-        document.getElementById("edit_Desc").value = item;
+        document.getElementById("edit_DESC").value = item;
     }else if (index == 5) {
         document.getElementById("edit_Medicina").value = item;
     }
@@ -204,10 +204,10 @@ async function actualizar_medico(){
     $( "#myformEditMed" ).validate({
             messages: {
                 edit_IDC: {
-                    required: "Porfavor Ingrese el Tipo"
+                    required: "Porfavor Ingrese el ID de Cita"
                 },
                 edit_DESC: {
-                    required: "Porfavor Ingrese la Fecha "
+                    required: "Porfavor Ingrese la Descripcion"
                 },
             },
             submitHandler: function(form) {
