@@ -39,26 +39,7 @@
         
     </script>
 
-    <script type="text/javascript">
-        // USER LOGIN
-        
-        async function btnlog(){ 
-			//var username = $('#get_user_login').val();
-			//alert(username);
-            eel.btn_login($('#get_user_login').val(), $('#get_user_password').val())
-        };
-
-        eel.expose(login_return)
-        function login_return(status){ //alert(status);
-           if (status == "success"){
-               location.href = "index.html";
-            }
-            if (status == "failed"){ 
-                $('#login_txt').text("Incorrect User or Password")
-            }
-        }
-    </script>
-
+    
     
 
     

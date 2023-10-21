@@ -1,10 +1,7 @@
 $(document).ready(function(){
-    eel.fetch_diag()
+    eel.fetch_users()
     eel.get_user_online()
-    eel.get_DMedico()
-    eel.get_DPaciente()
-    eel.get_DMedicina()
-    
+
     document.addEventListener('contextmenu', event => {
         event.preventDefault();
     });
@@ -14,11 +11,11 @@ $(document).ready(function(){
     });
     $(".close").on("click", function() {
         $("#Addnewmodal").hide();
-        location.href = "crudDiagnosticos.html";
+        location.href = "crudUsuarios.html";
     });
     $(".closeEdit").on("click", function() {
         $("#Editmodal").hide();
-        location.href = "crudDiagnosticos.html";
+        location.href = "crudUsuarios.html";
     });
     $(".closedelete").on("click", function() {
         $("#Delete_modal_medico").hide();
@@ -35,48 +32,32 @@ function action_out(registers){
     registers.forEach(showdata)
 }
 
-eel.expose(action_NM)
-function action_NM(registers){ 
-    registers.forEach(showNM)
-    registers.forEach(showNME)
-}
-
-eel.expose(action_NP)
-function action_NP(registers){ 
-    registers.forEach(showNP)
-    registers.forEach(showNPE)
-}
-
-eel.expose(action_MD)
-function action_MD(registers){ 
-    registers.forEach(showMD)
-    registers.forEach(showMDE)
-}
-
 //-------------EDITAR----------------
 eel.expose(action_edit_m)
 function action_edit_m(editMedicos){ 
-   editMedicos.forEach(get_diag_values)
+   editMedicos.forEach(get_user_values)
 }
 
 async function btn_edit(id){ 
-    eel.get_diag(id)
+    eel.get_user(id)
     $("#Editmodal").show();
 }
 
-function get_diag_values(item, index){
+function get_user_values(item, index){
     if (index == 0) {
         document.getElementById("m_id").value = item;
     } else if (index == 1) {
-        document.getElementById("edit_NP").value = item;
+        document.getElementById("edit_Nombre").value = item;
     } else if (index == 2) {
-        document.getElementById("edit_NM").value = item;
+        document.getElementById("edit_Correo").value = item;
     } else if (index == 3) {
-        document.getElementById("edit_IDC").value = item;
+        document.getElementById("edit_DUI").value = item;
     }else if (index == 4) {
-        document.getElementById("edit_DESC").value = item;
+        document.getElementById("edit_Cargo").value = item;
     }else if (index == 5) {
-        document.getElementById("edit_Medicina").value = item;
+        document.getElementById("edit_Pass").value = item;
+    }else if (index == 6) {
+        document.getElementById("edit_User").value = item;
     }
     else {}
  
@@ -91,6 +72,7 @@ function showdata(item, index){
     var td4 = document.createElement("td");
     var td5 = document.createElement("td");
     var td6 = document.createElement("td");
+    var td7 = document.createElement("td");
     var td8 = document.createElement("td");
 
     var id = item[0]
@@ -99,7 +81,8 @@ function showdata(item, index){
     td3.innerText = item[2]
     td4.innerText = item[3]
     td5.innerText = item[4]
-    td6.innerText = item[5]
+    td6.innerText = "******"
+    td7.innerText = item[6]
                 
     td8.innerHTML = '<button type="button" class="btn-warning" onclick="btn_edit('+id+')">Editar</button> <button type="button" class="btn-danger" onclick="buttondelete('+id+')">Eliminar</button>'
                 
@@ -110,83 +93,39 @@ function showdata(item, index){
     tr.appendChild(td4)
     tr.appendChild(td5)
     tr.appendChild(td6)
+    tr.appendChild(td7)
     tr.appendChild(td8)
 }
 
 //--------------------AGREGAR-----------------------
-function showNM(item, index){
-    var get_table = document.getElementById("txtNM");
-    var op = document.createElement("option");
-
-    var id = item[0]
-    op.innerText = item[0]
-                
-    get_table.appendChild(op)
-}
-
-function showNME(item, index){
-    var get_table = document.getElementById("edit_NM");
-    var op = document.createElement("option");
-
-    var id = item[0]
-    op.innerText = item[0]
-                
-    get_table.appendChild(op)
-}
-
-function showNP(item, index){
-    var get_table = document.getElementById("txtNP");
-    var op = document.createElement("option");
-
-    var id = item[0]
-    op.innerText = item[0]
-                
-    get_table.appendChild(op)
-}
-function showNPE(item, index){
-    var get_table = document.getElementById("edit_NP");
-    var op = document.createElement("option");
-
-    var id = item[0]
-    op.innerText = item[0]
-                
-    get_table.appendChild(op)
-}
-
-function showMD(item, index){
-    var get_table = document.getElementById("txtMedicina");
-    var op = document.createElement("option");
-
-    var id = item[0]
-    op.innerText = item[0]
-                
-    get_table.appendChild(op)
-}
-function showMDE(item, index){
-    var get_table = document.getElementById("edit_Medicina");
-    var op = document.createElement("option");
-
-    var id = item[0]
-    op.innerText = item[0]
-                
-    get_table.appendChild(op)
-}
-
 async function agregar_medico(){
     $( "#myform" ).validate({
             messages: {
                 txtID: {
                     required: "Porfavor Ingrese el ID"
                 },
-                txtIDC: {
-                    required: "Porfavor Ingrese el ID de la cita"
+                txtNombre: {
+                    required: "Porfavor Ingrese el Nombre"
                 },
-                txtDESC: {
-                    required: "Porfavor Ingrese la Descripcion"
+                txtCorreo: {
+                    required: "Porfavor Ingrese el Correo"
+                },
+                txtDUI: {
+                    required: "Porfavor Ingrese el DUI"
+                },
+                txtCargo: {
+                    required: "Porfavor Ingrese el Cargo"
+                },
+                
+                txtPass: {
+                    required: "Porfavor Ingrese la Contraseña"
+                },
+                txtUser: {
+                    required: "Porfavor Ingrese el nombre de Usuario"
                 },
             },
             submitHandler: function(form) {
-                eel.save_diag($('#txtID').val(),$('#txtNP').val(),$('#txtNM').val(),$('#txtIDC').val(),$('#txtDESC').val(),$('#txtMedicina').val())
+                eel.save_users($('#txtID').val(),$('#txtNombre').val(),$('#txtCorreo').val(),$('#txtDUI').val(),$('#txtCargo').val(),$('#txtPass').val(),$('#txtUser').val())
             }
     });
 };
@@ -194,10 +133,14 @@ async function agregar_medico(){
 eel.expose(save_return); 
 function save_return(status){
     if (status == "success"){
-        $('#return_register').text('Nuevo Diagnostico Agregado!');
+        $('#return_register').text('Nuevo Usuario Agregado!');
         $('#txtID').val('');
-        $('#txtIDC').val('');
-        $('#txtDESC').val('');
+        $('#txtNombre').val('');
+        $('#txtCorreo').val('');
+        $('#txtDUI').val('');
+        $('#txtCargo').val('');
+        $('#txtPass').val('');
+        $('#txtUser').val('');
     }
     if (status == "failure"){
         $('#return_register').text('Error al agregar, asegurese de no haber dejado espacios en blanco.');
@@ -208,22 +151,35 @@ function save_return(status){
 async function actualizar_medico(){
     $( "#myformEditMed" ).validate({
             messages: {
-                edit_IDC: {
-                    required: "Porfavor Ingrese el ID de Cita"
+                edit_Nombre: {
+                    required: "Porfavor Ingrese el Nombre"
                 },
-                edit_DESC: {
-                    required: "Porfavor Ingrese la Descripcion"
+                edit_Correo: {
+                    required: "Porfavor Ingrese el Correo"
+                },
+                edit_DUI: {
+                    required: "Porfavor Ingrese el DUI"
+                },
+                edit_Cargo: {
+                    required: "Porfavor Ingrese el Cargo"
+                },
+                
+                edit_Pass: {
+                    required: "Porfavor Ingrese la contraseña"
+                },
+                edit_User: {
+                    required: "Porfavor Ingrese el Nombre de Usuario"
                 },
             },
             submitHandler: function(form) {
-                eel.update_diag($('#m_id').val(),$('#edit_NP').val(),$('#edit_NM').val(),$('#edit_IDC').val(),$('#edit_DESC').val(),$('#edit_Medicina').val())
+                eel.update_user($('#m_id').val(),$('#edit_Nombre').val(),$('#edit_Correo').val(),$('#edit_DUI').val(),$('#edit_Cargo').val(),$('#edit_Pass').val(),$('#edit_User').val())
             }
     });
 };
 eel.expose(update_return); 
 function update_return(status){
     if (status == "success"){
-        $('#return_update').text('El Diagnostico se actualizo correctamente!');
+        $('#return_update').text('El Usuario se actualizo correctamente!');
     }
     if (status == "failure"){
         $('#return_register').text('Error al actualizar, asegurese de no haber dejado espacios en blanco.');
@@ -239,15 +195,15 @@ function buttondelete(id)
 }
 
 async function btn_submitdelete(id){ 
-    eel.get_delete_diag(id)
+    eel.get_delete_user(id)
 }
 
 eel.expose(delete_return)
 function delete_return(status){ 
     if (status == "success"){
-        location.href = "crudDiagnosticos.html";
+        location.href = "crudUsuarios.html";
     }
     if (status == "failure"){
-        $('#return_delete').text('Ocurrio un error al eliminar el diagnostico');
+        $('#return_delete').text('Ocurrio un error al eliminar el usuario');
     }
 }

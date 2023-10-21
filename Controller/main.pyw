@@ -7,6 +7,7 @@ from Models.paciente import *
 from Models.medicina import *
 from Models.cita import *
 from Models.diagnostico import *
+from Models.usuarios import *
  
 actual_user = 'empty'
 
@@ -200,9 +201,37 @@ def get_delete_diag(id):
     eel.delete_return(select_del_diag)
 
 
+#----------------CRUD USUARIOS---------------------
+@eel.expose
+def fetch_users():
+    select_reg = showallusers()
+    eel.action_out(select_reg)
+
+@eel.expose 
+def save_users(id, nombre, correo, dui, cargo, password, user):
+    print(id, nombre, correo, dui, cargo, password, user)
+    msg = saveUser(int(id),nombre, correo, dui, cargo, password, user)
+    print(msg)
+    eel.save_return(str(msg))
+
+@eel.expose
+def get_user(id):
+    select_medico = showSelectedUser(id)
+    print(select_medico)
+    eel.action_edit_m(select_medico)
+     
+@eel.expose 
+def update_user(id, nombre, correo, dui, cargo, password, user):
+    msg = updateUser(id, nombre, correo, dui, cargo, password, user)
+    eel.update_return(str(msg))    
+     
+@eel.expose
+def get_delete_user(id):
+    select_del_medico = deleteUser(id)
+    eel.delete_return(select_del_medico)
 
 eel.start(
-    'templates/index.html',
+    'templates/login.html',
     size=pyautogui.size(),
     jinja_templates='templates'
 )

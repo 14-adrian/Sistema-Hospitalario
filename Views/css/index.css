@@ -1,4 +1,9 @@
 #login/views/css/main.css
+
+.disabled {
+    pointer-events: none;
+}
+
 body{
     padding: 0;
     margin: 0;

@@ -1,6 +1,11 @@
 $(document).ready(function(){
     eel.fetch_medicos()
     eel.get_user_online()
+
+    document.addEventListener('contextmenu', event => {
+        event.preventDefault();
+    });
+
     $("#btn_addnew").on("click", function() {
         $("#Addnewmodal").show();
     });

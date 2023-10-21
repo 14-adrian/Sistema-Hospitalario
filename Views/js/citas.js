@@ -3,6 +3,12 @@ $(document).ready(function(){
     eel.get_user_online()
     eel.get_NMedico()
     eel.get_NPaciente()
+
+    document.addEventListener('contextmenu', event => {
+        event.preventDefault();
+    });
+
+
     $("#btn_addnew").on("click", function() {
         $("#Addnewmodal").show();
     });
