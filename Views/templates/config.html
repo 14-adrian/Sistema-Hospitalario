@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Configuraciones</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/sb-admin-2.min.css" rel="stylesheet">
+    </head>
+    <body style="padding: 20px;">
+        
+        <div class="modalContainer" id="Editmodal">
+            <div class="modal-content">
+              <span id="close" class="closeEdit">×</span>
+              <p style="text-align:center;"><h2>Configurar Base de Datos</h2></p>
+              <form class="form-detail" action="#" method="post" id="myformEditMed"><input type="hidden" name="med_id" id="m_id"  style="padding: 20px;">
+                <div class="form-group" style="padding: 10px;">
+                    <label>Host:</label>
+                    <input type="text" name="edit_Host" id="edit_Host" class="form-control" required >
+                </div>
+                    <div class="form-group" style="padding: 10px;">
+                        <label>Usuario:</label>
+                        <input type="text" name="edit_Usuario" id="edit_Usuario" class="form-control" required >
+                    </div>
+                  <div class="form-group" style="padding: 10px;">
+                      <label>Password:</label>
+                      <input type="password" name="edit_Pass" id="edit_Pas" class="form-control">
+                  </div>
+                  <div class="form-group" style="padding: 10px;">
+                      <label>Database:</label>
+                      <input type="text" name="edit_Db" id="edit_Db" class="form-control" required >
+                  </div>
+                  <div class="form-group form-row-last" style="padding: 10px;">
+                      <input type="submit" name="register" class="btn btn-success" value="Actualizar" onclick="actualizar_db();">
+                  </div>
+                  <div class="box"><label class="label_input" id="return_update" style="width: 90%;color:green;font-weight:bold;"></label></div>
+              </form>
+            </div>
+        </div>
+        <script type="text/javascript" src="/eel.js"></script>
+        <script type="text/javascript" src="../js/config.js"></script>  
+    </body>
+</html>

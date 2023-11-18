@@ -19,7 +19,7 @@
 		<div class="row">
         <div class="wrap-login">
             <div class="login_label">
-                <label class="label_login">Ingresar</label>
+                <label class="label_login">Iniciar Sesion</label>
             </div>
             <div class="login_user">
                 <label class="label_input">Usuario:</label>
@@ -30,7 +30,8 @@
                 <input type="password" class="inputs" name="password" id="get_user_password" placeholder="* * * * * * * * *">
             </div>
             <div class="buttons_container">
-                <button class="buttons" onclick="btnlog();">Confirmar</button>
+                <button class="buttons confg" onclick="btnDB();">Configuraciones</button>
+                <button class="buttons" onclick="btnlog();">Ingresar</button>
             </div>
             <div class="login_user" style="text-align: center;width: 100%;">
                 <div id="login_txt"></div>
@@ -47,6 +48,10 @@
         document.addEventListener('contextmenu', event => {
             event.preventDefault();
         });
+
+        async function btnDB(){
+            eel.config()
+        }
         
         async function btnlog(){ 
 			//var username = $('#get_user_login').val();
