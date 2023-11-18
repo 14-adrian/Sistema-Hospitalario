@@ -1,0 +1,5 @@
+pip install pyautogui --user
+
+pip install eel[jinja2] --user
+
+pip install mysql-connector-python --user
