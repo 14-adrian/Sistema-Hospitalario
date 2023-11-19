@@ -9,6 +9,7 @@ from Models.cita import *
 from Models.diagnostico import *
 from Models.usuarios import *
 import json
+import os
  
 actual_user = 'empty'
 
@@ -230,6 +231,7 @@ def update_user(id, nombre, correo, dui, cargo, password, user):
 def get_delete_user(id):
     select_del_medico = deleteUser(id)
     eel.delete_return(select_del_medico)
+    
 
 @eel.expose
 def config():
@@ -243,6 +245,23 @@ def config():
 with open('Models/conexion.json', 'r') as f:
         data = json.load(f)
 data_val = list(data.values())
+
+@eel.expose
+def update_conf(host, user, passw, db):
+    filename = 'Models/conexion.json'
+    with open(filename, 'r') as f:
+        dato = json.load(f)
+        dato['host'] = host
+        dato['user'] = user
+        dato['password'] = passw
+        dato['database'] = db
+
+    os.remove(filename)
+    with open(filename, 'w') as f:
+        json.dump(dato, f, indent=4)
+
+    
+       
 
 @eel.expose
 def getDataJson():

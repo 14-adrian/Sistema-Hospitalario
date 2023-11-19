@@ -1,9 +1,14 @@
 import mysql.connector
 import json
+import os
 
-with open('Models/conexion.json', 'r') as f:
-        data = json.load(f)
+filename = 'Models/conexion.json'
+with open(filename, 'r') as f:
+    data = json.load(f)
+    
 data_val = list(data.values())
+
+
 
 def myDB():
       
